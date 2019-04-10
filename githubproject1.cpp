@@ -3,10 +3,10 @@ using namespace std;
 int main() 
 {
       int at[10], bt[10];//at stands for arrival time and bt stands for burst time
-      int i, smallest, n;
+      int i, low, n;
       double wt = 0;//wt=waiting time
 	  double ta = 0;//ta=turnaround time
-	  double end;
+	  double it;//intermediate time
       float avgwt, avgta;//avgwt=average waiting time  avgta=average turnaround time
       cout<<"Enter the Total Number of Processes"<<endl;
       cin>>n; //max no of processes
@@ -25,21 +25,21 @@ int main()
       int count=0;
       for(t = 0; count != n; t++)
       {
-            smallest = n-1;
+            low = n-1;
             for(i = 0; i < n; i++)
             {
-                  if(at[i] <= t && bt[i] < bt[smallest] && bt[i] > 0)
+                  if(at[i] <= t && bt[i] < bt[low] && bt[i] > 0)
                   {
-                        smallest = i;
+                        low = i;
                   }
             }
-            bt[smallest]--;
-            if(bt[smallest] == 0)
+            bt[low]--;
+            if(bt[low] == 0)
             {
                   count++;
                   end = t + 1;
-                  wt = wt + end - at[smallest] - temp[smallest];
-                  ta = ta + end - at[smallest];
+                  wt = wt + end - at[low] - temp[low];
+                  ta = ta + end - at[low];
             }
       }
       avgwt = wt / n; 
